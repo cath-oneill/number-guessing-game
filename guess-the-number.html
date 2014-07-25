@@ -1,0 +1,127 @@
+<html>
+<head>
+  <title>Guess the Number!</title>
+  <link rel="stylesheet" href="http://cdn.foundation5.zurb.com/foundation.css">  
+  <style>
+    form, #feedback {
+      background-color: yellow;
+      -webkit-border-radius: 10px;
+      -moz-border-radius: 10px;
+      border-radius: 10px;
+      padding: 10px;
+      float: left;
+      display: none;
+      clear: both;
+    }
+
+  </style>
+</head>
+<body>
+	<h2>Guess the Number Game</h2>
+  <button onclick="start_game();">START THE GAME!</button>
+  <p>Please guess a number between 1 and 100.  But stay away from the landmine number!</p>
+  <form>
+  <input name="guess" id="guess" placeholder="Enter a number."></input><input type="submit" value="GUESS" />
+  </form>
+  <div id="feedback">
+    <p id="feedback_text"></p>
+    <p id="landmine_text"></p>
+  </div>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+<script type="text/javascript">
+
+  var secretNumber;
+  var guess;
+  var landmineNumber;
+  var landmineArray;
+  var $form = $('form');
+  var $feedback_text = $('#feedback_text');
+  var $feedback = $('#feedback');
+  var $guess = $('#guess');
+  var $landmine_text = $('#landmine_text')
+
+  var start_game = function() {
+  	secretNumber = parseInt(Math.random() * 100, 10) + 1;
+    landmineArray = []
+    for (var i = 0; i < 3; i++) {
+      landmineArray[i] = parseInt(Math.random() * 100, 10) + 1; 
+    };
+    
+    for (var i = 0; i < landmineArray.length; i++) {
+      if (secretNumber === landmineArray[i]) {
+        start_game();
+      };    
+    };
+
+  	console.log("Secret Number: " + secretNumber);
+    console.log(landmineArray);
+    $form.show();
+    $feedback.hide();
+  };
+  
+  $form.submit(function (e) {
+    var formdata = $form.serializeArray();
+    e.preventDefault();
+    console.log(formdata);
+    var current_guess = formdata[0].value;
+    // var current_guess = $guess.val();
+    console.log("Current guess: " + current_guess);
+    check_guess(current_guess);
+    $feedback.show();
+    $guess.val('')
+  })
+
+  var nearestLandmine = function (guess){
+    var smallestDistance = 100;
+    for (var i = 0; i < landmineArray.length; i++) {
+      var distance = Math.abs(guess - landmineArray[i]); 
+      console.log("Loop -- Landmine number: " + landmineArray[i] + ". Distance = " + distance);   
+      if (distance < smallestDistance) {
+        smallestDistance = distance;
+        landmineNumber = landmineArray[i];
+      };
+    }; 
+  };
+
+
+  var check_guess = function(guess) {
+    nearestLandmine(guess);
+    console.log("Nearest Landmine Number: " + landmineNumber);
+  	if (guess === landmineNumber) {
+      $feedback_text.html("Oh no! You stepped on the landmine.  You lost!");
+      $form.hide();
+    } else if (guess == secretNumber) {
+      $feedback_text.html("Congrats! You got the correct number!");
+      $form.hide();
+      $landmine_text.html('');
+    } else if (guess > secretNumber) {
+  		$feedback_text.html("Your guess is too high! Guess again.");
+      check_landmine_number(guess);
+  	} else if (guess < secretNumber) {
+  		$feedback_text.html("Your guess is too low! Guess again.");
+      check_landmine_number(guess);
+  	}  else {
+  		alert("Please enter only numbers!");
+  	};
+  };
+
+  var check_landmine_number = function(guess) {
+      var distance = Math.abs(guess - landmineNumber);    
+  
+      if (distance > 50) {
+        $landmine_text.html("You're safe.  You are very far away from the dangerous landmine number.");
+      } else if (distance > 20) {
+        $landmine_text.html("You're pretty far from the landmine number.  You're safe right now, but try not to get too close.");
+      } else if (distance > 10) {
+        $landmine_text.html("You're getting closer to the number.  Watch out!");
+      } else if (distance > 5)  {
+        $landmine_text.html("Be very careful!  You are in the neighborhood of the landmine.  Watch out!");
+      } else {
+        $landmine_text.html("DANGER! The landmine is very close!!!");
+      };
+
+  };
+</script>
+
+</body>
+</html>
