@@ -3,29 +3,28 @@
   <title>Guess the Number!</title>
   <link rel="stylesheet" href="http://cdn.foundation5.zurb.com/foundation.css">  
   <style>
-    form, #feedback {
-      background-color: yellow;
-      -webkit-border-radius: 10px;
-      -moz-border-radius: 10px;
-      border-radius: 10px;
-      padding: 10px;
-      float: left;
-      display: none;
-      clear: both;
+    body {
+      background-color: #86cf74;
+      background-image: url('images/argyle.png');
     }
 
   </style>
 </head>
 <body>
-	<h2>Guess the Number Game</h2>
-  <button onclick="start_game();">START THE GAME!</button>
-  <p>Please guess a number between 1 and 100.  But stay away from the landmine number!</p>
-  <form>
-  <input name="guess" id="guess" placeholder="Enter a number."></input><input type="submit" value="GUESS" />
-  </form>
-  <div id="feedback">
-    <p id="feedback_text"></p>
-    <p id="landmine_text"></p>
+  <div class = "row">
+    <div class="small-6 small-centered panel">
+    	<h2>Guess the Number Game</h2>
+      <button onclick="start_game();">START THE GAME!</button>
+      <p>Please guess a number between 1 and 100.  But stay away from the landmine number!</p>
+      
+      <form>
+      <input name="guess" id="guess" placeholder="Enter a number."></input><input type="submit" value="GUESS" />
+      </form>
+      <div id="feedback">
+        <p id="feedback_text"></p>
+        <p id="landmine_text"></p>
+      </div>
+    </div>
   </div>
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 <script type="text/javascript">
