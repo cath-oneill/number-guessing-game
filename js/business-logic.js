@@ -23,6 +23,10 @@
 			};
 		};
 
+		this.checkLandmineNumbers = function (currentGuess, landmineArray) {
+
+		};
+
 		this.checkGuessVsSecret = function (currentGuess, secretNumber) {
 			if (this.checkValidEntry(currentGuess) === false) {
 				return "incorrectEntry";

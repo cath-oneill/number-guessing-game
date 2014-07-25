@@ -22,6 +22,29 @@ describe("BusinessLogic ....................", function() {
     });
   });
 
+  describe ("checkLandmineNumbers", function() {
+    it ('returns "warning" message if guess is within 5 of landmine', function() {
+      var array = [25, 33, 18];
+      var guess = 28;
+      var result = logic.checkLandmineNumbers(guess, array);
+      expect(result).toEqual("warning");
+    });
+
+    it ('returns "extremeWarning" message if guess is within 1 of landmine', function() {
+      var array = [25, 33, 18];
+      var guess = 34;
+      var result = logic.checkLandmineNumbers(guess, array);
+      expect(result).toEqual("extremeWarning");
+    });
+
+    it ('returns "gameOver" message if guess is landmine', function() {
+      var array = [25, 33, 18];
+      var guess = 18;
+      var result = logic.checkLandmineNumbers(guess, array);
+      expect(result).toEqual("gameOver");
+    });
+  });
+
 
   describe ("checkGuessVsSecret", function() {
     it ('returns "tooHighMessage" if the guess is bigger than the secret number', function() {
