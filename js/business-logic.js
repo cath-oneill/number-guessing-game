@@ -1,22 +1,37 @@
 (function () {
-	var Logic = function() {
-		var secretNumber;
+	var BusinessLogic = function() {
 
-		this.makeSecretNumber = function () {
-  			secretNumber = parseInt(Math.random() * 100, 10) + 1;
+		this.setSecretNumber = function () {
+  			return parseInt(Math.random() * 100, 10) + 1;
 		};
 
-		this.checkGuessVsSecret = function (currentGuess) {
-		    if (currentGuess == secretNumber) {
+		this.checkValidEntry = function (currentGuess) {
+			if (isNaN(currentGuess)) {
+				return false;
+			} else if (currentGuess < 1 || currentGuess > 100) {
+				return false;
+			} else {
+				return true;
+			};
+		};
+
+		this.checkGuessVsSecret = function (currentGuess, secretNumber) {
+			if (this.checkValidEntry(currentGuess) === false) {
+				return "incorrectEntry";
+			} else if (currentGuess == secretNumber) {
 		    	return "successMessage";
 		    } else if (currentGuess > secretNumber) {
 		    	return 'tooHighMessage';
 		  	} else if (currentGuess < secretNumber) {
 		  		return 'tooLowMessage';
-		  	}  else {
-		  		alert("Please enter only numbers!");
 		  	};
 		}; // end checkGuessVsSecret
 
+		this.startGame = function() {
+
+		};
+
 	}; // end Logic
-}); //end anonymous function
+
+	window.logic = new BusinessLogic();
+})(); //end anonymous function
