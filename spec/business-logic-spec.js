@@ -26,22 +26,36 @@ describe("BusinessLogic ....................", function() {
     it ('returns "warning" message if guess is within 5 of landmine', function() {
       var array = [25, 33, 18];
       var guess = 28;
-      var result = logic.checkLandmineNumbers(guess, array);
+      var result = logic.checkLandmineNumbers(guess, array).message;
       expect(result).toEqual("warning");
     });
 
     it ('returns "extremeWarning" message if guess is within 1 of landmine', function() {
       var array = [25, 33, 18];
       var guess = 34;
-      var result = logic.checkLandmineNumbers(guess, array);
+      var result = logic.checkLandmineNumbers(guess, array).message;
       expect(result).toEqual("extremeWarning");
     });
 
     it ('returns "gameOver" message if guess is landmine', function() {
       var array = [25, 33, 18];
       var guess = 18;
-      var result = logic.checkLandmineNumbers(guess, array);
+      var result = logic.checkLandmineNumbers(guess, array).message;
       expect(result).toEqual("gameOver");
+    });
+
+    it ('returns "noProblem" message if guess is further than 5 away', function() {
+      var array = [25, 33, 18];
+      var guess = 99;
+      var result = logic.checkLandmineNumbers(guess, array).message;
+      expect(result).toEqual("noProblem");
+    });
+
+    it ('returns the index of the nearest landmine', function() {
+      var array = [25, 33, 18];
+      var guess = 45;
+      var result = logic.checkLandmineNumbers(guess, array).ind;
+      expect(result).toEqual(1);
     });
   });
 

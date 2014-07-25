@@ -23,9 +23,42 @@
 			};
 		};
 
-		this.checkLandmineNumbers = function (currentGuess, landmineArray) {
+		this.nearestLandmine = function (guess, landmineArray){
+		    var nearestLandmineNumber;
+		    var savedIndex;
+		    var smallestDistance = 100;
+		    for (var i = 0; i < landmineArray.length; i++) {
+		      var distance = Math.abs(guess - landmineArray[i]); 
+		      if (distance < smallestDistance) {
+		        smallestDistance = distance;
+		        nearestLandmineNumber = landmineArray[i];
+		        savedIndex = i;
+		      };
+		    }; 
+		    return {
+		    	landmineNumber: nearestLandmineNumber,
+		    	ind: savedIndex
+		    };
+		  };
 
+		this.checkLandmineNumbers = function (currentGuess, landmineArray) {
+		    var nearestLandmine = this.nearestLandmine(currentGuess, landmineArray);
+		    var landmineNumber = nearestLandmine.landmineNumber;
+		    var i = nearestLandmine.ind;
+		    var distance = Math.abs(currentGuess - landmineNumber);    
+		    var message;
+		      if (distance === 0) {
+		      	message = "gameOver";
+		      } else if (distance === 1) {
+		        message = "extremeWarning";					      	
+		      }  else if (distance <= 5) {
+		      	message = "warning";
+		      } else {
+		      	message = "noProblem"
+		      };
+		     return {message: message, ind: i};
 		};
+	
 
 		this.checkGuessVsSecret = function (currentGuess, secretNumber) {
 			if (this.checkValidEntry(currentGuess) === false) {
