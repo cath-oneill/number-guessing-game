@@ -1,6 +1,7 @@
 (function() {
 	var Presentation = function() {
 		var secretNumber;
+		var landmineArray;
 		var $form = $('form');
   		var $feedback_text = $('#feedback_text');
   		var $feedback = $('#feedback');
@@ -22,20 +23,27 @@
 			};
 		};
 
+		var landmineFeedback = function(currentGuess) {
+			var landmineData = logic.checkLandmineNumbers(currentGuess, landmineArray);
+			if (landmineData.message === "gameOver") {}
+		}
+
 		$submit_button.on('click', function(e) {	
 			var currentGuess = +$guess.val();
-			$feedback_text.text();
+			var landmineMsg = 
 			$feedback_text.text(feedbackMessage(currentGuess));
 		    $feedback.show();
 		    $guess.val('')
+
 		    e.preventDefault();
 		});
 
 
-
 		$start_button.on('click', function() {	
 		    secretNumber = logic.setSecretNumber();
+		    landmineArray = logic.setLandmineNumbers();
 		    console.log("Secret number: " + secretNumber);
+		    console.log("Landmine numbers: " + landmineArray);
 		    $form.show();
 		    $feedback.hide();
 		    $start_button.hide();
