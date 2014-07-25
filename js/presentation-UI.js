@@ -10,6 +10,7 @@
 			var message = logic.checkGuessVsSecret(currentGuess, secretNumber);
 			if (message === "successMessage") {
 				return "Congrats! You got the correct number!";
+				
 			} else if (message === "tooHighMessage") {
 				return "Your guess is too high! Guess again.";
 			} else if (message === "tooLowMessage") {
@@ -20,10 +21,11 @@
 		};
 
 		$('#submit-button').on('click', function(e) {	
-			var currentGuess = +$('#guess').val();
-			$('#feedback_text').text(feedbackMessage(currentGuess));
-		    // $feedback.show();
-		    // $guess.val('')
+			var currentGuess = +$guess.val();
+			$feedback_text.text(feedbackMessage(currentGuess));
+		    $feedback.show();
+		    $guess.val('')
+		    e.preventDefault();
 		});
 
 
@@ -31,8 +33,8 @@
 		$('#start-button').on('click', function() {	
 		    secretNumber = logic.setSecretNumber();
 		    console.log("Secret number: " + secretNumber);
-		    // $form.show();
-		    // $feedback.hide();
+		    $form.show();
+		    $feedback.hide();
 		});	
 	};//close Presentation
 	window.presentation = Presentation;
