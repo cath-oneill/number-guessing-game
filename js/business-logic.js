@@ -5,6 +5,14 @@
   			return parseInt(Math.random() * 100, 10) + 1;
 		};
 
+		this.setLandmineNumbers = function() {
+			var landmineArray = [];
+			for (var i = 0; i < 3; i++) {
+      			landmineArray[i] = parseInt(Math.random() * 100, 10) + 1; 
+    		};
+    		return landmineArray;
+		};
+
 		this.checkValidEntry = function (currentGuess) {
 			if (isNaN(currentGuess)) {
 				return false;
@@ -27,9 +35,6 @@
 		  	};
 		}; // end checkGuessVsSecret
 
-		this.startGame = function() {
-
-		};
 
 	}; // end Logic
 

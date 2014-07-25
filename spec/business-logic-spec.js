@@ -9,6 +9,19 @@ describe("BusinessLogic ....................", function() {
     });
   });
 
+  describe ("setLandmineNumbers", function() {
+    it ("returns an array with three numbers between 1 and 100", function(){
+      var result = logic.setLandmineNumbers();
+      expect(typeof result).toBe("object");
+      expect(result.length).toEqual(3);
+      
+      result = result[0]
+      expect(typeof result).toBe("number");
+      expect(result).toBeGreaterThan(0);
+      expect(result).toBeLessThan(101);
+    });
+  });
+
 
   describe ("checkGuessVsSecret", function() {
     it ('returns "tooHighMessage" if the guess is bigger than the secret number', function() {

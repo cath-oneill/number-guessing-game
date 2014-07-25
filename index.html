@@ -8,45 +8,62 @@
       background-image: url('images/argyle.png');
     }
 
-
-
+    .top-bar {
+      margin-bottom: 10px;
+    }
   </style>
 </head>
 <body>
-  <div class = "row">
-    <div class="small-6 small-centered panel">
-    	<h2>Guess the Number Game</h2>
-      <button id="start-button">START THE GAME!</button>
-      <p>Please guess a number between 1 and 100.<!--   But stay away from the landmine number! --></p>
-      
-      <form class="hide" id= "guessdiv">
-      <input name="guess" id="guess" placeholder="Enter a number."></input>
-      <button type="submit" id="submit-button">SUBMIT</button>
-      </form>
-      <div id="feedback">
+  <nav class="top-bar" data-topbar>
+    <ul class="title-area">
+      <li class="name">
+        <h1><a href="#">Catherine O'Neill -- Number Guessing</a></h1>
+      </li>
+    </ul>
+  </nav>
 
-        <p><em>Feedback: </em><span id="feedback_text"></span></p>
-        <p id="landmine_text"></p>
+  <div class = "row">
+    <div class="large-12 columns panel">
+    	<h2>Guess the Number Game</h2>
+      <p>Please guess a number between 1 and 100. But stay away from the landmine numbers!</p>
+    </div>
+  </div>
+  <div class = "row">
+    <div class="large-12 columns panel">
+      
+      <div class="large-3 columns large-centered">
+        <button id="start-button">START NEW GAME!</button>
       </div>
+
+      <form class="hide" id= "guessdiv">
+        <div class="row">
+
+          <div class="large-6 columns large-centered">
+            <label>Enter your guess:
+              <input name="guess" type="text" id="guess" placeholder="Enter a number."></input>
+            </label>
+            <button type="submit" id="submit-button">SUBMIT</button>
+          </div>
+
+        </div>
+      </form>
+
+    </div>
+  </div>
+  <div class = "hide row" id ="feedback">
+    <div class="small-centered columns panel">
+      
+        <p id="feedback_text"></p>
+        <p id="landmine_text"></p>
+
     </div>
   </div>
 
-<!-- //   var secretNumber;
-//   var guess;
-//   var landmineNumber;
-//   var landmineArray;
-//   var $form = $('form');
-//   var $feedback_text = $('#feedback_text');
-//   var $feedback = $('#feedback');
-//   var $guess = $('#guess');
-//   var $landmine_text = $('#landmine_text')
+<!--<script>
 
 //   var start_game = function() {
 //   	secretNumber = parseInt(Math.random() * 100, 10) + 1;
-//     landmineArray = []
-//     for (var i = 0; i < 3; i++) {
-//       landmineArray[i] = parseInt(Math.random() * 100, 10) + 1; 
-//     };
+
     
 //     for (var i = 0; i < landmineArray.length; i++) {
 //       if (secretNumber === landmineArray[i]) {
